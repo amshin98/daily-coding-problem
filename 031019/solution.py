@@ -1,11 +1,13 @@
 '''
-I'm thinking swapping stuff?
+I'm thinking swapping stuff? Will finish tomorrow
 '''
 
 def first_try(array, k):
    for i in range(len(array)):
-      tmp = array[i]
       idx = (i + k) % len(array)
-      array[i] = array[idx]
-      array[idx] = tmp
+      tmp = array[idx]
+      array[idx] = array[i]
+      print(array[i])
+      print(idx)
+      array[i] = tmp
 
