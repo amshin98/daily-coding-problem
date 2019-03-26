@@ -4,4 +4,4 @@ This problem was asked by Amazon.
 
 Given an array and a number k that's smaller than the length of the array, rotate the array to the right k elements in-place.
 
-Chrck out DCP [here](https://www.dailycodingproblem.com/)
+Check out DCP [here](https://www.dailycodingproblem.com/)
