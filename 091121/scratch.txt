@@ -1,0 +1,17 @@
+- Isn't this just bfs? I think it goes:
+  - If root, print self
+  - Print left child if exists
+  - Print right child if exists
+  - Call BFS on left child if exists
+  - Call BFS on right child if exists
+
+- Nope it'd just go down the left side
+
+- I vaguely remember something about stacks for dfs and queues for bfs
+  - Initialize queue
+  - Enqueue root node
+  - While queue not empty
+    - Poll and print
+    - Enqueue left child then right child
+
+- Thank you past self for making test utils and a BST
