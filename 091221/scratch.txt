@@ -1,0 +1,16 @@
+- Bit of a spoiler but the follow-up made me realize the easiest thing was to:
+  - Find the product of all the elements in the list
+  - Create the answer list by dividing the product by the item at the list to get what the product would be without it
+- This doesn't work if there's only one 0 !!!!!
+
+- First pass done
+
+- For doing this without division, it'd be easy to set up a nested loop but that'd be O(n^2). Let's start with this
+
+- In terms of improving it, no ideas come to mind immediately
+
+- Got an idea to fix the division solution though:
+  - Ignore 0's while creating the list product and keep track of the number of 0's in the list
+  - If multiple 0's, return a list of 0's the same length as the input list
+  - If one 0, return a list of 0's except the position of the 0, which would be the product
+  - Else, return normal list calc with division
