@@ -1,0 +1,7 @@
+- Hash table w/ key as element, value as number of times
+- O(2n) traverse list once to build table and get count of elements. Traverse hash table once to see which element has value > floor(len(lst) / 2.0)
+- O(n) traverse list to build table, add a check after you increment a value to see if value > floor(len(lst) / 2.0)? Wouldn't work, don't have length of list unless using len(lst) over and over.
+
+- If we care about performance that much then don't use len(lst) otherwise I like just saving floor(len(lst) / 2.0) as a value then adding a check after incrementing a value
+
+- The given example is wrong because it states the majority element "appears more than half the time (> floor(len(lst) / 2.0))", but 1 appears only 3 times and the list's length is 7
