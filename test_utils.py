@@ -2,34 +2,38 @@
 Some testing utilities for my DCP stuff
 '''
 
-class BSTNode:
-   def __init__(self, data, left: BSTNode = None, right: BSTNode = None):
+class BTNode:
+   def __init__(self, data, left = None, right = None):
       self.data = data
       self.left = left
       self.right = right
 
    def __str__(self):
-      return "Data: %s Left: %s Right: %s" % (data, left.data, right.data)
+      return "Data: %s" % (self.data)
+
 
 class BST:
-   def __init__(self, root: BSTNode = None):
+   def __init__(self, root = None):
       self.root = root
 
-   def add(self, node: BSTNode):
-      """Equal to left"""
-      add_helper(self.root, node)
-
-   def add_helper(cur_node, new_node):
-      if new_node.data < cur_node.data:
-         if cur_node.left == None:
+   def add_helper(self, cur_node, new_node):
+      if new_node.data <= cur_node.data:
+         if cur_node.left is None:
             cur_node.left = new_node
          else:
-            add_helper(cur_node.left, new_node)
+            self.add_helper(cur_node.left, new_node)
       else:
-         if cur_node.right = None:
+         if cur_node.right is None:
             cur_node.right = new_node
          else:
-            add_helper(cur_node.right, new_node)
+            self.add_helper(cur_node.right, new_node)
+
+   def add(self, node):
+      """Equal to left"""
+      if self.root is None:
+         self.root = node
+      else:
+         self.add_helper(self.root, node)
 
    def print_preorder(self):
       preorder_helper(self.root)
@@ -44,10 +48,17 @@ class BST:
          preorder_helper(cur_node.right)
 
 
-class GNode:
-   def __init__(self, data, adj_list: List[GNode] = None):
-      self.data = data
-      self.adj_list = adj_list
-
 def build_BST(items):
    """Build a BST given a list of items to add"""
+   tree = BST()
+
+   for item in items:
+      tree.add(BTNode(item))
+
+   return tree
+
+
+class GNode:
+   def __init__(self, data, adj_list = None):
+      self.data = data
+      self.adj_list = adj_list
