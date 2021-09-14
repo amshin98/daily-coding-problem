@@ -1,0 +1,22 @@
+- First thought: do this how we did heaps in 202 (using a list)
+  - Each place in the list is a node, with the root at index 1 (0 is unused)
+  - Left child is at index 2n
+  - Right child is at index (2n) + 1
+  - None can be used as an empty spot? I'd rather use "EMPTY" or something
+  - What delimiter should we use? Since we don't know anything about the
+    input data and the example doesn't use spaces let's just do that
+
+
+- Some specifics:
+  - The value of the Node is stored in the string
+  - Space delimited
+  - "EMPTY" is used for blank spots
+
+- Resizing list: we can do what we did in C and do new size = current size * 2
+  - list.extend(<what to add at the end>)
+
+- Wow this keeps getting more complicated
+
+- Keep track of current node's index via a recursive parameter
+
+- TIL len() is O(1) so we don't need to keep track of size as a parameter (phew)
