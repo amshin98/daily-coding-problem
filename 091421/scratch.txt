@@ -1,3 +1,4 @@
+===== Serialize =====
 - First thought: do this how we did heaps in 202 (using a list)
   - Each place in the list is a node, with the root at index 1 (0 is unused)
   - Left child is at index 2n
@@ -20,3 +21,13 @@
 - Keep track of current node's index via a recursive parameter
 
 - TIL len() is O(1) so we don't need to keep track of size as a parameter (phew)
+
+===== Deserialize =====
+- First thought: recursively build and return nodes
+  - Base case: No children, return node containing current value
+  - Otherwise, return node containing current value, left child as recursive call on
+    value at idx 2 * cur_idx, right child as recursive call on 2 * cur_idx
+    - Build left and right child first, then assign to current node so we can check
+      if EMPTY
+
+- After writing some code I simplified it into what it is now

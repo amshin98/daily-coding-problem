@@ -25,5 +25,21 @@ def serialize(root):
    return " ".join(node_list)
 
 
+def deserialize_helper(cur_idx, val_list):
+   left_child = None
+   right_child = None
+
+   if len(val_list) > cur_idx * 2 and val_list[cur_idx * 2] != "EMPTY":
+      left_child = deserialize_helper(cur_idx * 2, val_list)
+   if len(val_list) > cur_idx * 2 + 1 and val_list[cur_idx * 2 + 1] != "EMPTY":
+      right_child = deserialize_helper(cur_idx * 2 + 1, val_list)
+
+   return Node(val_list[cur_idx], left_child, right_child)
+
+
 def deserialize(s):
-   pass
+   val_list = s.split(" ")
+
+   root = deserialize_helper(1, val_list)
+
+   return root
