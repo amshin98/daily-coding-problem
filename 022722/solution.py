@@ -41,6 +41,31 @@ of the root, everything from that node to the right is in the right subtree
 
 '''
 
+class BST:
+   def __init__(self, root = None):
+      self.root = root
+
+   def insert(self, val):
+      if self.root == None:
+         self.root = Node(val, None, None)
+      else:
+         self.insert_helper(self.root, val)
+
+   def insert_helper(self, node, val):
+      if hash(val) < hash(node):
+         if node.left == None:
+            node.left = Node(val, None, None)
+            return
+         else:
+            self.insert_helper(node.left, val)
+      if hash(val) >= hash(node):
+         if node.right == None:
+            node.right = Node(val, None, None)
+            return
+         else:
+            self.insert_helper(node.right, val)
+
+
 class Node:
    def __init__(self, data, left, right):
       self.data = data
@@ -51,8 +76,11 @@ class Node:
       return "data: %s left: %s right: %s" % (self.data, self.left.data if self.left else None, self.right.data if self.right else None)
    
 def pre_in_to_tree(preorder, inorder):
+   print("====================")
+   print(preorder)
+   print(inorder)
 
-   # If either list is empty, return None
+   # If either list is empty or None, return None
    if len(preorder) == 0:
       return None
 
@@ -70,11 +98,13 @@ def pre_in_to_tree(preorder, inorder):
 
    # Identify left and right preorder lists
    pre_split = 0
-   for i in range(1, len(preorder)):
+   for i in range(0, len(preorder)):
       if preorder[i] in right_in:
          pre_split = i
          break
-   
+   print("ps", pre_split)
+   print(preorder)
+   print(inorder)
    left_pre = preorder[1:pre_split] if len(preorder) > 1 else []  
    right_pre = preorder[pre_split:] if pre_split < len(preorder) else []
 

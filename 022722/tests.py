@@ -1,5 +1,7 @@
+from re import L
 import unittest
 from solution import *
+import random
 
 def preorder(root):
    res = []
@@ -38,6 +40,28 @@ class Tests(unittest.TestCase):
       self.assertListEqual(pre_list, preorder(res_root))
       self.assertListEqual(in_list, inorder(res_root))
 
+   def random_test(self, size):
+      '''Generate a random BT and run a test on it'''
+      nums = random.sample(range(100), size)
+      bst = BST()
+      for num in nums:
+         bst.insert(num)
+
+      pre_list = preorder(bst.root)
+      in_list = inorder(bst.root)
+
+      print("Testing for")
+      print("Pre", pre_list)
+      print("Ino", in_list)
+
+      res_root = pre_in_to_tree(pre_list, in_list)
+
+      self.assertListEqual(pre_list, preorder(res_root))
+      self.assertListEqual(in_list, inorder(res_root))
+
+   def test_random_lists(self):
+      for i in range(10):
+         self.random_test(i + 2 )
 
 
 if __name__ == "__main__":
