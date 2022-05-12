@@ -46,14 +46,24 @@ class Node:
       self.data = data
       self.left = left
       self.right = right
+
+   def __repr__(self):
+      return "data: %s left: %s right: %s" % (self.data, self.left.data if self.left else None, self.right.data if self.right else None)
    
 def pre_in_to_tree(preorder, inorder):
+   print("it")
+   print(preorder, inorder)
+
    # If either list is empty, return None
    if len(preorder) == 0:
       return None
 
    # Find root value
    root_val = preorder[0]
+
+   # If the lists have one element, return the node with None L/R
+   if len(preorder) == 1:
+      return Node(root_val, None, None)
 
    # Identify left and right inorder lists
    in_split = inorder.index(root_val)
@@ -67,13 +77,14 @@ def pre_in_to_tree(preorder, inorder):
          pre_split = i
          break
    
-   left_pre = preorder[pre_split:]
-   right_pre = preorder[pre_split + 1:] if pre_split < len(preorder) - 1 else []
+   left_pre = preorder[1:pre_split] if len(preorder) > 1 else []  
+   right_pre = preorder[pre_split:] if pre_split < len(preorder) else []
 
    # Recurse over the left and right subtrees
    left_tree = pre_in_to_tree(left_pre, left_in)
    right_tree = pre_in_to_tree(right_pre, right_in)
-   node = Node(data, left_tree, right_tree)
+   node = Node(root_val, left_tree, right_tree)
+   print(node)
 
    return node
 
@@ -110,5 +121,6 @@ preorder(test_pre, res_root)
 test_in = []
 inorder(test_in, res_root)
 
+print("ans")
 print(test_pre)
 print(test_in)
