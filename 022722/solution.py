@@ -51,8 +51,6 @@ class Node:
       return "data: %s left: %s right: %s" % (self.data, self.left.data if self.left else None, self.right.data if self.right else None)
    
 def pre_in_to_tree(preorder, inorder):
-   print("it")
-   print(preorder, inorder)
 
    # If either list is empty, return None
    if len(preorder) == 0:
@@ -84,7 +82,6 @@ def pre_in_to_tree(preorder, inorder):
    left_tree = pre_in_to_tree(left_pre, left_in)
    right_tree = pre_in_to_tree(right_pre, right_in)
    node = Node(root_val, left_tree, right_tree)
-   print(node)
 
    return node
 
