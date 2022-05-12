@@ -88,39 +88,40 @@ def pre_in_to_tree(preorder, inorder):
 
    return node
 
+# Test from email
+if __name__ == "__main__":
+      
+   pre_list = [1, 2, 4, 5, 3, 6, 7]
+   in_list = [4, 2, 5, 1, 6, 3, 7]
 
-   
-pre_list = [1, 2, 4, 5, 3, 6, 7]
-in_list = [4, 2, 5, 1, 6, 3, 7]
+   res_root = pre_in_to_tree(pre_list, in_list)
 
-res_root = pre_in_to_tree(pre_list, in_list)
+   print(res_root.data)
 
-print(res_root.data)
+   def preorder(acc, root):
+      acc.append(root.data)
 
-def preorder(acc, root):
-   acc.append(root.data)
+      if root.left != None:
+         preorder(acc, root.left)
 
-   if root.left != None:
-      preorder(acc, root.left)
-
-   if root.right != None:
-      preorder(acc, root.right)
+      if root.right != None:
+         preorder(acc, root.right)
 
 
-def inorder(acc, root):
-   if root.left != None:
-      inorder(acc, root.left)
+   def inorder(acc, root):
+      if root.left != None:
+         inorder(acc, root.left)
 
-   acc.append(root.data)
+      acc.append(root.data)
 
-   if root.right != None:
-      inorder(acc, root.right)
+      if root.right != None:
+         inorder(acc, root.right)
 
-test_pre = []
-preorder(test_pre, res_root)
-test_in = []
-inorder(test_in, res_root)
+   test_pre = []
+   preorder(test_pre, res_root)
+   test_in = []
+   inorder(test_in, res_root)
 
-print("ans")
-print(test_pre)
-print(test_in)
+   print("ans")
+   print(test_pre)
+   print(test_in)
