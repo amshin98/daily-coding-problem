@@ -41,19 +41,55 @@ of the root, everything from that node to the right is in the right subtree
 
 '''
 
+class BST:
+   def __init__(self, root = None):
+      self.root = root
+
+   def insert(self, val):
+      if self.root == None:
+         self.root = Node(val, None, None)
+      else:
+         self.insert_helper(self.root, val)
+
+   def insert_helper(self, node, val):
+      if hash(val) < hash(node):
+         if node.left == None:
+            node.left = Node(val, None, None)
+            return
+         else:
+            self.insert_helper(node.left, val)
+      if hash(val) >= hash(node):
+         if node.right == None:
+            node.right = Node(val, None, None)
+            return
+         else:
+            self.insert_helper(node.right, val)
+
+
 class Node:
    def __init__(self, data, left, right):
       self.data = data
       self.left = left
       self.right = right
+
+   def __repr__(self):
+      return "data: %s left: %s right: %s" % (self.data, self.left.data if self.left else None, self.right.data if self.right else None)
    
 def pre_in_to_tree(preorder, inorder):
-   # If either list is empty, return None
+   print("====================")
+   print(preorder)
+   print(inorder)
+
+   # If either list is empty or None, return None
    if len(preorder) == 0:
       return None
 
    # Find root value
    root_val = preorder[0]
+
+   # If the lists have one element, return the node with None L/R
+   if len(preorder) == 1:
+      return Node(root_val, None, None)
 
    # Identify left and right inorder lists
    in_split = inorder.index(root_val)
@@ -62,53 +98,57 @@ def pre_in_to_tree(preorder, inorder):
 
    # Identify left and right preorder lists
    pre_split = 0
-   for i in range(1, len(preorder)):
+   for i in range(0, len(preorder)):
       if preorder[i] in right_in:
          pre_split = i
          break
-   
-   left_pre = preorder[pre_split:]
-   right_pre = preorder[pre_split + 1:] if pre_split < len(preorder) - 1 else []
+   print("ps", pre_split)
+   print(preorder)
+   print(inorder)
+   left_pre = preorder[1:pre_split] if len(preorder) > 1 else []  
+   right_pre = preorder[pre_split:] if pre_split < len(preorder) else []
 
    # Recurse over the left and right subtrees
    left_tree = pre_in_to_tree(left_pre, left_in)
    right_tree = pre_in_to_tree(right_pre, right_in)
-   node = Node(data, left_tree, right_tree)
+   node = Node(root_val, left_tree, right_tree)
 
    return node
 
+# Test from email
+if __name__ == "__main__":
+      
+   pre_list = [1, 2, 4, 5, 3, 6, 7]
+   in_list = [4, 2, 5, 1, 6, 3, 7]
 
-   
-pre_list = [1, 2, 4, 5, 3, 6, 7]
-in_list = [4, 2, 5, 1, 6, 3, 7]
+   res_root = pre_in_to_tree(pre_list, in_list)
 
-res_root = pre_in_to_tree(pre_list, in_list)
+   print(res_root.data)
 
-print(res_root.data)
+   def preorder(acc, root):
+      acc.append(root.data)
 
-def preorder(acc, root):
-   acc.append(root.data)
+      if root.left != None:
+         preorder(acc, root.left)
 
-   if root.left != None:
-      preorder(acc, root.left)
-
-   if root.right != None:
-      preorder(acc, root.right)
+      if root.right != None:
+         preorder(acc, root.right)
 
 
-def inorder(acc, root):
-   if root.left != None:
-      inorder(acc, root.left)
+   def inorder(acc, root):
+      if root.left != None:
+         inorder(acc, root.left)
 
-   acc.append(root.data)
+      acc.append(root.data)
 
-   if root.right != None:
-      inorder(acc, root.right)
+      if root.right != None:
+         inorder(acc, root.right)
 
-test_pre = []
-preorder(test_pre, res_root)
-test_in = []
-inorder(test_in, res_root)
+   test_pre = []
+   preorder(test_pre, res_root)
+   test_in = []
+   inorder(test_in, res_root)
 
-print(test_pre)
-print(test_in)
+   print("ans")
+   print(test_pre)
+   print(test_in)
